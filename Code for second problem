@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+
+string compress(string str){
+    string result="";
+    int i = 0;
+    int count = 0;
+    while(i < str.length() - 1) {
+        count++;
+        if (str[i] != str[i+1]) {
+            result+=str[i];
+            result+=count + '0';
+            count = 0;
+        }
+        i++;
+    }
+    count=count+1;
+    result+=str[i];
+    result+=count+'0';
+    return result;    
+}
+
+string reverseCompress(string comStr){
+    string result="";
+    int i=0,j=-1;
+    while(i < comStr.length() - 1){
+        for(int k=0;k<comStr[i+1]-'0';k++){
+            result+=comStr[i];
+        }
+        i=i+2;
+    }
+    return result;
+}
+
+
+int main(){
+    string s1,compressed,decompressed;
+    cin>>s1;
+    compressed=compress(s1);
+    cout<<compressed<<endl;
+    string temp=compressed;
+    decompressed=reverseCompress(temp);
+    cout<<decompressed;
+    return 0;
+}
